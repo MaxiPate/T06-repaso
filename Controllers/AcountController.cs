@@ -16,6 +16,17 @@ public class AcountController : Controller
 
     public IActionResult LogIn()
     {
-        return View();
+        return View("LogIn");
+    }
+
+    public IActionResult LogInGuardar(string username, string password){
+        int id = BD.Login(username, password);
+        if(id == 0){
+            return View("ErrorLogIn");
+        }else{
+            HttpContext.Session.SetString("idUser", id.ToString());
+            
+            return View("Personal");
+        }
     }
 }
