@@ -25,7 +25,7 @@ public class AcountController : Controller
             return View("ErrorLogIn");  
         }else{
             HttpContext.Session.SetString("idUser", id.ToString());
-            
+            ViewBag.
             return View("Personal");
         }
     }

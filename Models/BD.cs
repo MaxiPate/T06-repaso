@@ -28,12 +28,9 @@ public static class BD{
         string query = "INSERT INTO Usuario (username, password, nombre, apellido, foto) VALUES (@username, @password, @nombre, @apellido, @foto)";
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new {});
+            connection.Execute(query, new {username = usu.username, password = usu.password, nombre = usu.nombre, apelldio = usu.apellido, foto = usu.foto});
         }
     }
-
-
-    Ver COMO ES EL REGISTRO QUE CREO QUE ESTA MAL
 
 
 
