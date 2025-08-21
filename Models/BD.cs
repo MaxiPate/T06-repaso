@@ -1,40 +1,48 @@
 using  Microsoft.Data.SqlClient;
 using Dapper;
 public static class BD{
-    private static string _connectionString = @"Server=localhost; DataBase=Presentacion; Integrated Security=True; TrustServerCertificate=True;";
+    private static string _connectionString = @"Server=localhost; DataBase=TP06_repaso-PatejimFeldman; Integrated Security=True; TrustServerCertificate=True;";
     public static int Login(string username, string password){
         int aux;
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
             
-            string query = "SELECT * FROM Usuario WHERE password = @password AND username = @username";
+            string query = "SELECT id FROM Usuario WHERE password = @password AND username = @username";
             aux = connection.QueryFirstOrDefault<int>(query, new {username, password});
 
         }
         return aux;
     }
-    public static Usuario VerificarUsuario(int username){
-        Usuario aux;
+    public static int VerificarUsuario(string username){
+        int aux;
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
             
-            string query = "SELECT * FROM Usuario WHERE username = @username";
-            aux = connection.QueryFirstOrDefault<Usuario>(query, new {username});
+            string query = "SELECT id FROM Usuario WHERE username = @username";
+            aux = connection.QueryFirstOrDefault<int>(query, new {username});
 
         }
         return aux;
     }
-    public static Usuario Registrar(Usuario usu){
-        Usuario aux;
+    public static void Registrar(Usuario usu){
+        string query = "INSERT INTO Usuario (username, password, nombre, apellido, foto) VALUES (@username, @password, @nombre, @apellido, @foto)";
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
-            
-            string query = "INSERT INTO Usuario (username, password, nombre, apellido, foto, fechaLastLogIn) VALUES (@username, @password, @nombre, @apellido, @foto, @fechaLastLogIn)";
-            aux = connection.QueryFirstOrDefault<Usuario>(query, new {usu});
-
+            connection.Execute(query, new {});
         }
-        return aux;
     }
+
+
+    Ver COMO ES EL REGISTRO QUE CREO QUE ESTA MAL
+
+
+
+
+
+
+
+
+
     public static Tarea AgregarTarea(Tarea tarea){
         Tarea aux;
         using(SqlConnection connection = new SqlConnection(_connectionString))

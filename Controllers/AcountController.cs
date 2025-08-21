@@ -22,10 +22,24 @@ public class AcountController : Controller
     public IActionResult LogInGuardar(string username, string password){
         int id = BD.Login(username, password);
         if(id == 0){
-            return View("ErrorLogIn");
+            return View("ErrorLogIn");  
         }else{
             HttpContext.Session.SetString("idUser", id.ToString());
             
+            return View("Personal");
+        }
+    }
+
+    public IActionResult SignIn()
+    {
+        return View("SignIn");
+    }
+
+    public IActionResult SignInGuardar(string username, string password, string nombre, string apelldio){
+        int id = BD.VerificarUsuario(username);
+        if(id != 0){
+            return View("ErrorSignIn");
+        }else{
             return View("Personal");
         }
     }

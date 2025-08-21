@@ -18,7 +18,7 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult VerTareas(){
-        return View();
+    public IActionResult Volver(){
+        return View("Index");
     }
 }
