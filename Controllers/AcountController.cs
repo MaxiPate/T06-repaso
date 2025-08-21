@@ -25,7 +25,7 @@ public class AcountController : Controller
             return View("ErrorLogIn");  
         }else{
             HttpContext.Session.SetString("idUser", id.ToString());
-            ViewBag.
+            
             return View("Personal");
         }
     }
@@ -35,12 +35,17 @@ public class AcountController : Controller
         return View("SignIn");
     }
 
-    public IActionResult SignInGuardar(string username, string password, string nombre, string apelldio){
+    public IActionResult SignInGuardar(string username, string password, string nombre, string apellido){
         int id = BD.VerificarUsuario(username);
         if(id != 0){
             return View("ErrorSignIn");
         }else{
+            
             return View("Personal");
         }
+    }
+    public IActionResult CerrarSesion(){
+        HttpContext.Session.Clear();
+        return View("CerrarSesion");
     }
 }

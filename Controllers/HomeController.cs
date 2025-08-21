@@ -21,4 +21,8 @@ public class HomeController : Controller
     public IActionResult Volver(){
         return View("Index");
     }
+
+    public IActionResult VerTareas(){
+        
+    }
 }
